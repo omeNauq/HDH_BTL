@@ -1,0 +1,13 @@
+# binary
+bin/
+outputs/
+
+# build artifacts
+*.o
+*.out
+*.exe
+
+# OS / editor
+.vscode/
+.idea/
+.DS_Store
