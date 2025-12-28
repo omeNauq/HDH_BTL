@@ -1,5 +1,6 @@
 #include "judge.h"
 #include <fstream>
+#include <iostream>
 #include <string>
 
 static std::string trim(const std::string& s) {
@@ -12,40 +13,32 @@ static std::string trim(const std::string& s) {
 
 JudgeResult Judge::judge(
     const std::string& outputFile,
-    const std::string& expectedFile
+    const std::string& expectedFile,
+    int testIndex
 ) {
     std::ifstream out(outputFile);
     std::ifstream exp(expectedFile);
 
     if (!out.is_open() || !exp.is_open()) {
-        return {
-            WRONG_ANSWER,
-            "Cannot open output or expected file"
-        };
+        std::cout << "Test " << testIndex << ": Wrong Answer\n";
+        return { WRONG_ANSWER };
     }
 
     std::string outLine, expLine;
-    int line = 1;
 
     while (true) {
         bool outOk = static_cast<bool>(std::getline(out, outLine));
         bool expOk = static_cast<bool>(std::getline(exp, expLine));
 
         if (!outOk && !expOk) {
-            return {
-                ACCEPTED,
-                "Accepted"
-            };
+            std::cout << "Test " << testIndex << ": Accepted\n";
+            return { ACCEPTED };
         }
 
         if (outOk != expOk ||
             trim(outLine) != trim(expLine)) {
-            return {
-                WRONG_ANSWER,
-                "Wrong Answer at line " + std::to_string(line)
-            };
+            std::cout << "Test " << testIndex << ": Wrong Answer\n";
+            return { WRONG_ANSWER };
         }
-
-        line++;
     }
 }

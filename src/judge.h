@@ -10,14 +10,14 @@ enum JudgeStatus {
 
 struct JudgeResult {
     JudgeStatus status;
-    std::string message;
 };
 
 class Judge {
 public:
     static JudgeResult judge(
         const std::string& outputFile,
-        const std::string& expectedFile
+        const std::string& expectedFile,
+        int testIndex
     );
 };
 
