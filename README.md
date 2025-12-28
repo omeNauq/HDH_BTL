@@ -14,6 +14,7 @@ The system automatically:
 COMPILE:
 
 g++ src/\*.cpp -o bin/autograder
+
 RUN:
 
 ./bin/autograder
