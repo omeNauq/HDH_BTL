@@ -12,9 +12,12 @@ The system automatically:
 ## Build
 
 COMPILE:
+
 g++ src/\*.cpp -o bin/autograder
 RUN:
+
 ./bin/autograder
+
 Notes:
 
 bin/ and outputs/ are generated automatically at runtime and are not included in the repository.
