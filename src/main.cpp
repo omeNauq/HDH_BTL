@@ -18,15 +18,13 @@ int main() {
 
     std::cout << "Compile OK\n";
 
-    // 2. Run tests (AUTO SCAN)
-    int i = 1;
+    int testIndex = 1;
     int passed = 0;
     int total  = 0;
 
     while (true) {
-        std::string input    = "tests/input"    + std::to_string(i) + ".txt";
-        std::string expected = "tests/expected" + std::to_string(i) + ".txt";
-        std::string output   = "outputs/output" + std::to_string(i) + ".txt";
+        std::string input    = "tests/input"    + std::to_string(testIndex) + ".txt";
+        std::string expected = "tests/expected" + std::to_string(testIndex) + ".txt";
 
         if (!fileExists(input) || !fileExists(expected)) {
             break; // hết test
@@ -37,26 +35,27 @@ int main() {
         RunResult r = Runner::run(
             "bin/user_program",
             input,
-            output,
             2
         );
 
         if (r.status != RUN_SUCCESS) {
-            std::cout << "Test " << i << ": " << r.message << "\n";
-            i++;
-            continue;
+            std::cout << "Test " << testIndex << ": "
+                      << r.message << "\n";
+        } else {
+            JudgeResult j = Judge::judge(
+                r.output,
+                expected,
+                testIndex
+            );
+
+            if (j.status == ACCEPTED) {
+                passed++;
+            }
         }
 
-        JudgeResult j = Judge::judge(output, expected, i);
-
-        if(j.status == ACCEPTED) {
-            passed++;
-        }
-
-        i++;
+        testIndex++;
     }
 
-    // 3. Final result
     std::cout << "\nFinal Result: "
               << passed << " / " << total
               << " test cases passed\n";

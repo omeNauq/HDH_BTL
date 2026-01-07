@@ -11,7 +11,7 @@ enum RunStatus {
 
 struct RunResult {
     RunStatus status;
-    int exitCode;
+    std::string output;   // stdout lấy từ pipe
     std::string message;
 };
 
@@ -20,7 +20,6 @@ public:
     static RunResult run(
         const std::string& programPath,
         const std::string& inputFile,
-        const std::string& outputFile,
         int timeLimitSec
     );
 };

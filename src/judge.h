@@ -15,7 +15,7 @@ struct JudgeResult {
 class Judge {
 public:
     static JudgeResult judge(
-        const std::string& outputFile,
+        const std::string& programOutput,
         const std::string& expectedFile,
         int testIndex
     );

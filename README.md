@@ -5,9 +5,8 @@ A simple auto-grading system written in C++ for Operating Systems coursework.
 The system automatically:
 
 - Compiles C/C++ submissions
-- Runs programs with input redirection
+- Runs programs with input redirection, using redirect pipe
 - Applies time limits
-- Compares output with expected results (AC / WA)
 
 ## Build
 
